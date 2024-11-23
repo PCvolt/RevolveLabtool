@@ -1,0 +1,21 @@
+repos:
+-   repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v18.1.2
+    hooks:
+      -   id: clang-format
+          args: [-i]
+- repo: https://github.com/cheshirekow/cmake-format-precommit
+  rev: v0.6.13
+  hooks:
+    - id: cmake-format
+      args: [-i]
+- repo: https://github.com/Lucas-C/pre-commit-hooks
+  rev: v1.5.1
+  hooks:
+    - id: forbid-crlf
+    - id: remove-crlf
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v3.4.0
+  hooks:
+    - id: trailing-whitespace
+    - id: end-of-file-fixer
