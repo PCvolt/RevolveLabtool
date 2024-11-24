@@ -21,3 +21,19 @@ _xxx_pct = sprites + graphical assets
 ```
 
 If a file is missing from the .dat, the game will fetch uncompressed files in the directory, so it is possible to edit the sprites without having to recompress (nor knowing the compression method either!)
+
+---
+## Setting the game in Debug Mode
+BBBR already come shipped with a debug mode that can be activated manually. From the ``cmd``, simply launch the game with arg ``-d``:
+```bash
+BBBR.exe -d
+```
+
+In Training Mode, these features become available:
+- F1: kill player 1
+- F2: kill player 2
+- F3: kill both players
+- F4: enable hitboxes
+- F5: player info view (p1/p2)
+- F6: ui debug
+- F10: pause
