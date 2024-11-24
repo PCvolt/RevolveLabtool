@@ -1,9 +1,16 @@
 #include "EntryPoint.hpp"
 
+#include "../revolveLib/RevolveLib.hpp"
+
 #include <iostream>
 
 namespace
 {
+void compileTimeStructChecks()
+{
+	static_assert(sizeof(revolve::Character) == 0xC0, "Struct size mismatch: Character");
+}
+
 void openConsole()
 {
 	AllocConsole();
@@ -16,7 +23,10 @@ void openConsole()
 
 DWORD WINAPI HookThread(HMODULE hModule)
 {
+	::compileTimeStructChecks();
 	::openConsole();
+
+	std::cout << revolve::character2.currentHealth << std::endl;
 
 	return 0;
 }
