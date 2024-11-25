@@ -5,8 +5,14 @@
 namespace revolve
 {
 
+struct Position
+{
+	int x;
+	int y;
+};
+
 // Size: 0xC0
-struct Character
+struct CharacterResources
 {
 	int maxHealth;
 	int maxMeter;
@@ -17,8 +23,22 @@ struct Character
 	char pad_2[128];
 };
 
-enum class CharacterIndex
+// Size: ??? (0x30D8 difference between p1 and p2)
+struct Character
 {
+	char pad_1[36];
+	Position currentPosition; // 0x24
+	Position nextPosition;	  // 0x2C // position.y freaks out, not reliable
+	short action;			  // 0x34, not reliable for "Thrown" action
+	char pad_2[66];
+	int pressedButtonsCorrectedDirections; // 0x9C
+	int pressedButtonsAbsoluteDirections;  // 0xA0
+	char pad_3[60];
+	int xSpeed; // 0xE0
+	int ySpeed; // 0xE4
+};
+
+enum class CharacterIndex {
 	Rouga = 1,
 	Kunagi,
 	Senna,
@@ -50,4 +70,6 @@ enum class Palette
 
 extern Character & character1;
 extern Character & character2;
+extern CharacterResources & characterResources1;
+extern CharacterResources & characterResources2;
 } // namespace revolve

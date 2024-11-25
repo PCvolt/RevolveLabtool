@@ -8,7 +8,7 @@ namespace
 {
 void compileTimeStructChecks()
 {
-	static_assert(sizeof(revolve::Character) == 0xC0, "Struct size mismatch: Character");
+	static_assert(sizeof(revolve::CharacterResources) == 0xC0, "Struct size mismatch: CharacterResources");
 }
 
 void openConsole()
@@ -26,7 +26,7 @@ DWORD WINAPI HookThread(HMODULE hModule)
 	::compileTimeStructChecks();
 	::openConsole();
 
-	std::cout << revolve::character2.currentHealth << std::endl;
+	std::cout << revolve::characterResources2.currentHealth << std::endl;
 
 	return 0;
 }
