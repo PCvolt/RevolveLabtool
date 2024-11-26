@@ -11,7 +11,7 @@ enum class Address : unsigned int
 	CharacterIndex1 = 0x635498,
 
 	MainMenuCursor = 0x122E1DC, // static: 0x170E1DC
-	DebugMode = 0x742128, // static: 0xC22128 // 0 = Release, 1 = Debug
+	DebugMode = 0x742128,		// static: 0xC22128 // 0 = Release, 1 = Debug
 };
 
 /*

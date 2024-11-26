@@ -38,7 +38,8 @@ struct Character
 	int ySpeed; // 0xE4
 };
 
-enum class CharacterIndex {
+enum class CharacterIndex
+{
 	Rouga = 1,
 	Kunagi,
 	Senna,
