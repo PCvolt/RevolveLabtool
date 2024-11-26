@@ -9,6 +9,8 @@ enum class Address : unsigned int
 	CharacterResources1 = 0x633C28,
 	CharacterResources2 = 0x633CE8,
 	CharacterIndex1 = 0x635498,
+
+	MainMenuCursor = 0x122E1DC, // static: 0x170E1DC
 };
 
 /*
