@@ -8,7 +8,10 @@ enum class Address : unsigned int
 	Character2 = 0x12322D0,
 	CharacterResources1 = 0x633C28,
 	CharacterResources2 = 0x633CE8,
-	CharacterIndex1 = 0x635498,
+
+	// Contain value from enum class CharacterIndex
+	CharacterSelectCursor1 = 0x635498,
+	CharacterSelectCursor2 = 0x63549C,
 
 	MainMenuCursor = 0x122E1DC, // static: 0x170E1DC
 	DebugMode = 0x742128,		// static: 0xC22128 // 0 = Release, 1 = Debug
