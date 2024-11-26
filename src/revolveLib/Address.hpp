@@ -11,11 +11,13 @@ enum class Address : unsigned int
 	CharacterIndex1 = 0x635498,
 
 	MainMenuCursor = 0x122E1DC, // static: 0x170E1DC
+	DebugMode = 0x742128, // static: 0xC22128 // 0 = Release, 1 = Debug
 };
 
 /*
  * Required as the base address may change when rebooted.
  */
 Address getBaseAddress();
+Address getDynamicAddress(Address relativeAddress);
 Address operator+(Address lhs, Address rhs);
 } // namespace revolve

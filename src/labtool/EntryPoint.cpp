@@ -21,12 +21,18 @@ void openConsole()
 }
 } // namespace
 
+void setDebugMode(bool isDebug)
+{
+	int & debugMode = *reinterpret_cast<int *>(revolve::getDynamicAddress(revolve::Address::DebugMode));
+	debugMode = isDebug;
+}
+
 DWORD WINAPI HookThread(HMODULE hModule)
 {
 	::compileTimeStructChecks();
 	::openConsole();
 
-	std::cout << revolve::characterResources2.currentHealth << std::endl;
+	setDebugMode(true);
 
 	return 0;
 }
