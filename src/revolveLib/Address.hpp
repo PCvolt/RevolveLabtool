@@ -15,8 +15,11 @@ enum class Address : uint32_t
 	CharacterSelectCursor1 = 0x635498,
 	CharacterSelectCursor2 = 0x63549C,
 
+	PauseMenu = 0x14B856C,
+	PauseMenuUniqueGauge = 0x742798,
 	MainMenuCursor = 0x122E1DC, // static: 0x170E1DC
-	DebugMode = 0x742128,		// static: 0xC22128 // 0 = Release, 1 = Debug
+	PauseMenuCursor = 0x12451b8,
+	DebugMode = 0x742128, // static: 0xC22128 // 0 = Release, 1 = Debug
 };
 
 /*

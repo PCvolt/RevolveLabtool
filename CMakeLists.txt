@@ -6,9 +6,13 @@ set(CMAKE_CXX_STANDARD 20)
 # RevolveLib.lib
 add_library(
   RevolveLib STATIC
-  src/revolveLib/RevolveLib.hpp src/revolveLib/Address.hpp
-  src/revolveLib/Address.cpp src/revolveLib/Character.cpp
-  src/revolveLib/Character.hpp)
+  src/revolveLib/RevolveLib.hpp
+  src/revolveLib/Address.hpp
+  src/revolveLib/Address.cpp
+  src/revolveLib/Character.cpp
+  src/revolveLib/Character.hpp
+  src/revolveLib/PauseMenu.hpp
+  src/revolveLib/PauseMenu.cpp)
 target_include_directories(RevolveLib PRIVATE src/revolveLib)
 
 # Labtool.dll
