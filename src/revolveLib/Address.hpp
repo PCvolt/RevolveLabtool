@@ -1,8 +1,10 @@
 #pragma once
 
+#include <stdint.h>
+
 namespace revolve
 {
-enum class Address : unsigned int
+enum class Address : uint32_t
 {
 	Character1 = 0x122F1F8,
 	Character2 = 0x12322D0,
