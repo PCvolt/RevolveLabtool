@@ -20,6 +20,12 @@ enum class Address : uint32_t
 	MainMenuCursor = 0x122E1DC, // static: 0x170E1DC
 	PauseMenuCursor = 0x12451b8,
 	DebugMode = 0x742128, // static: 0xC22128 // 0 = Release, 1 = Debug
+
+	// Calls
+	BattleSceneUpdate_FromMain = 0x24056,
+
+	// Functions
+	BattleSceneUpdate = 0x4361B0, // void battleLoop(int param_1)
 };
 
 /*

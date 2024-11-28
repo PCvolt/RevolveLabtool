@@ -5,7 +5,7 @@ namespace revolve
 struct PauseMenu
 {
 	int setModeInCharacterSelect; // 0 = VS mode, 1 = Training mode
-	int setModeInMatch; // 0 = VS mode, 1 = Training mode
+	int setModeInMatch;			  // 0 = VS mode, 1 = Training mode
 	int whoPaused;
 	int enemyAction;
 	int cpuLevel;

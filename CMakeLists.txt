@@ -16,8 +16,10 @@ add_library(
 target_include_directories(RevolveLib PRIVATE src/revolveLib)
 
 # Labtool.dll
-add_library(Labtool SHARED src/injector/DLLMain.cpp src/labtool/EntryPoint.cpp
-                           src/labtool/EntryPoint.hpp)
+add_library(
+  Labtool SHARED
+  src/injector/DLLMain.cpp src/labtool/EntryPoint.cpp
+  src/labtool/EntryPoint.hpp src/labtool/Hooks.cpp src/labtool/Hooks.hpp)
 target_include_directories(Labtool PRIVATE src/labtool src/injector)
 
 target_link_libraries(Labtool PRIVATE RevolveLib)
