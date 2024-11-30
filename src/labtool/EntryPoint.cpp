@@ -3,7 +3,10 @@
 
 #include "../revolveLib/RevolveLib.hpp"
 
+#include <chrono>
 #include <iostream>
+
+auto oldUnknownFunctionInGameLoop = (unsigned int(__cdecl *)(void)) nullptr;
 
 namespace
 {
@@ -20,6 +23,34 @@ void openConsole()
 	freopen_s(&f, "CONOUT$", "w", stdout);
 	std::cout << "Hooked to BBBR" << std::endl;
 }
+
+void displayFps()
+{
+	using namespace std::chrono;
+
+	// Count how many calls were performed
+	static int callNumbers = 0;
+	++callNumbers;
+
+	// Add time differences until it reaches 1 second
+	static auto lastTime = high_resolution_clock::now();
+	auto currentTime = high_resolution_clock::now();
+
+	auto elapsed = duration_cast<milliseconds>(currentTime - lastTime).count();
+	static auto elapsedTimeCumulated = 0;
+	elapsedTimeCumulated += elapsed;
+
+	// Display number of calls every second (FPS)
+	if (elapsedTimeCumulated >= 1000)
+	{
+		std::cout << callNumbers << std::endl;
+
+		callNumbers = 0;
+		elapsedTimeCumulated = 0;
+	}
+
+	lastTime = currentTime;
+}
 } // namespace
 
 void setDebugMode(bool isDebug)
@@ -30,10 +61,15 @@ void setDebugMode(bool isDebug)
 
 void newGameUpdate(void ** esi)
 {
-	std::cout << "aaa" << std::endl;
-
 	auto oldGameUpdate = (void (*)(void **))(*esi); // Ideally only set once at startup
 	oldGameUpdate(esi);
+}
+
+unsigned int functionInGameLoop()
+{
+	::displayFps();
+
+	return oldUnknownFunctionInGameLoop();
 }
 
 DWORD WINAPI HookThread(HMODULE hModule)
@@ -43,6 +79,12 @@ DWORD WINAPI HookThread(HMODULE hModule)
 
 	setDebugMode(true);
 	patchToCallShim((DWORD)revolve::getDynamicAddress(revolve::Address::GameUpdateShim), (DWORD)oldGameUpdateShim);
+
+	// Not very elegant, enum class Address is not handy for casting
+	auto addressUnknownFunction =
+		revolve::getDynamicAddress(static_cast<revolve::Address>(static_cast<uint32_t>(0x2400E)));
+	oldUnknownFunctionInGameLoop = (unsigned int(__cdecl *)(void))hookFunctionCall(
+		(DWORD) static_cast<uint32_t>(addressUnknownFunction), (DWORD)functionInGameLoop);
 
 	return 0;
 }
