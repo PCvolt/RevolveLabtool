@@ -11,6 +11,7 @@ add_library(
   src/revolveLib/Address.cpp
   src/revolveLib/Character.cpp
   src/revolveLib/Character.hpp
+  src/revolveLib/PauseMenu.cpp
   src/revolveLib/PauseMenu.hpp
   src/revolveLib/PauseMenu.cpp)
 target_include_directories(RevolveLib PRIVATE src/revolveLib)

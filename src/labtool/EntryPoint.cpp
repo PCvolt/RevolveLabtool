@@ -9,6 +9,8 @@
 
 auto oldUnknownFunctionInGameLoop = (unsigned int(__cdecl *)(void)) nullptr;
 
+bool isPaused = false;
+
 namespace
 {
 void compileTimeStructChecks()
@@ -73,17 +75,43 @@ void setDebugMode(bool isDebug)
 
 void newGameUpdate(void ** esi)
 {
+	if (isPaused)
+	{
+		return;
+	}
+
 	auto oldGameUpdate = (void (*)(void **))(*esi); // Ideally only set once at startup
 	oldGameUpdate(esi);
+}
+
+void frameStep()
+{
+	if (static_cast<int>(revolve::PauseMenuMode::TrainingMode) == revolve::pauseMenu.setModeInCharacterSelect)
+	{
+		static bool mustPauseNextFrame = false;
+
+		if (mustPauseNextFrame)
+		{
+			isPaused = true;
+			mustPauseNextFrame = !mustPauseNextFrame;
+		}
+
+		if (::isKeyJustPressed(0x39)) // key 9
+		{
+			isPaused = !isPaused;
+		}
+		else if (::isKeyJustPressed(0x30)) // key 0
+		{
+			isPaused = !isPaused;
+			mustPauseNextFrame = true;
+		}
+	}
 }
 
 unsigned int functionInGameLoop()
 {
 	//::displayFps();
-	if (::isKeyJustPressed(0x31)) // key 1
-	{
-		std::cout << "pressed!" << std::endl;
-	}
+	frameStep();
 
 	return oldUnknownFunctionInGameLoop();
 }
