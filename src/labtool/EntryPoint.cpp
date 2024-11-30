@@ -5,6 +5,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <unordered_map>
 
 auto oldUnknownFunctionInGameLoop = (unsigned int(__cdecl *)(void)) nullptr;
 
@@ -22,6 +23,17 @@ void openConsole()
 	FILE * f = new FILE;
 	freopen_s(&f, "CONOUT$", "w", stdout);
 	std::cout << "Hooked to BBBR" << std::endl;
+}
+
+bool isKeyJustPressed(int virtualKey)
+{
+	static std::unordered_map<int, bool> previousKeyState;
+	bool currentKeyState = GetAsyncKeyState(virtualKey) & 0x8000;
+	bool justPressed = currentKeyState && !previousKeyState[virtualKey];
+
+	previousKeyState[virtualKey] = currentKeyState;
+
+	return justPressed;
 }
 
 void displayFps()
@@ -67,7 +79,11 @@ void newGameUpdate(void ** esi)
 
 unsigned int functionInGameLoop()
 {
-	::displayFps();
+	//::displayFps();
+	if (::isKeyJustPressed(0x31)) // key 1
+	{
+		std::cout << "pressed!" << std::endl;
+	}
 
 	return oldUnknownFunctionInGameLoop();
 }
