@@ -1,4 +1,5 @@
 #include "EntryPoint.hpp"
+#include "Hooks.hpp"
 
 #include "../revolveLib/RevolveLib.hpp"
 
@@ -27,12 +28,21 @@ void setDebugMode(bool isDebug)
 	debugMode = isDebug;
 }
 
+void newGameUpdate(void ** esi)
+{
+	std::cout << "aaa" << std::endl;
+
+	auto oldGameUpdate = (void (*)(void **))(*esi); // Ideally only set once at startup
+	oldGameUpdate(esi);
+}
+
 DWORD WINAPI HookThread(HMODULE hModule)
 {
 	::compileTimeStructChecks();
 	::openConsole();
 
 	setDebugMode(true);
+	patchToCallShim((DWORD)revolve::getDynamicAddress(revolve::Address::GameUpdateShim), (DWORD)oldGameUpdateShim);
 
 	return 0;
 }

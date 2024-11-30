@@ -2,7 +2,7 @@
 
 DWORD hookFunctionCall(DWORD instructionAddress, DWORD target)
 {
-	const int instructionSize = 5;
+	constexpr int instructionSize = 5;
 
 	// Change the protection level to Read/Write for 5 bytes at the given address
 	DWORD oldProtection;
@@ -26,4 +26,41 @@ DWORD hookFunctionCall(DWORD instructionAddress, DWORD target)
 	}
 
 	return oldTargetAddress;
+}
+
+DWORD patchToCallShim(DWORD instructionAddress, DWORD target)
+{
+	constexpr auto sizeToPatch = 5;
+
+	DWORD oldProtection;
+	if (!VirtualProtect((void *)instructionAddress, sizeToPatch, PAGE_READWRITE, &oldProtection))
+	{
+		return 0;
+	}
+
+	*(BYTE *)instructionAddress = (BYTE)0xE8;
+	*((DWORD *)(instructionAddress + 1)) = target - (instructionAddress + sizeToPatch);
+
+	if (!VirtualProtect((void *)instructionAddress, sizeToPatch, oldProtection, &oldProtection))
+	{
+		return 0;
+	}
+
+	return 1;
+}
+
+void __declspec(naked) oldGameUpdateShim()
+{
+	// Replacing this code at +0x24053:
+	// 8b 06	MOV EAX, [ESI]
+	// 56		PUSH ESI
+	// ff d0	CALL EAX
+
+	__asm
+	{
+		pop eax
+		push esi
+		push eax
+		jmp newGameUpdate
+	}
 }

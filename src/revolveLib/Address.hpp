@@ -22,7 +22,7 @@ enum class Address : uint32_t
 	DebugMode = 0x742128, // static: 0xC22128 // 0 = Release, 1 = Debug
 
 	// Calls
-	BattleSceneUpdate_FromMain = 0x24056,
+	GameUpdateShim = 0x24053,
 
 	// Functions
 	BattleSceneUpdate = 0x4361B0, // void battleLoop(int param_1)
