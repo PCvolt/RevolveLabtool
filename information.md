@@ -1,6 +1,6 @@
 ## Programming Info
 - Language: C++
-- Main Game Library: DX Library (wrapper for DirectX) https://dxlib.xsrv.jp/dxfunc.html
+- Main Game Library: DX Library 3.05f (wrapper for DirectX) https://dxlib.xsrv.jp/dxfunc.html
 - .dat Compression method: Still unknown, devs used a tool from DX Library apparently
 
 Source: Interview with Yorito Kasugano (BBBR developer) https://discord.com/channels/1178068657180516372/1178068658157797479/1277668546847178783
@@ -20,7 +20,10 @@ _xxx_scr = script
 _xxx_pct = sprites + graphical assets
 ```
 
+## Missing files
 If a file is missing from the .dat, the game will fetch uncompressed files in the directory, so it is possible to edit the sprites without having to recompress (nor knowing the compression method either!)
+
+This also works from the opening movie ``BBBR_op.wmv``, and in the case it is absent, the game still runs as intended.
 
 ---
 ## Setting the game in Debug Mode

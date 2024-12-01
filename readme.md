@@ -1,4 +1,7 @@
 # Revolve Labtool
+## Features
+- Pause on ``9``
+- Framestep on ``0``
 
 ## Build the project
 
@@ -17,7 +20,7 @@ When contributing to the project, use pre-commit to maintain a uniform code.
 pre-commit install
 ```
 
-To fix the formatting, either try to commit to automatically fix, or run this command:
+To fix the formatting, either try to commit to automatically fix (does not work on --amend), or run this command:
 ```bash
 pre-commit run --all
 ```
