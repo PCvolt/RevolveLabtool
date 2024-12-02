@@ -30,10 +30,12 @@ struct Character
 	Position currentPosition; // 0x24
 	Position nextPosition;	  // 0x2C // position.y freaks out, not reliable
 	short action;			  // 0x34, not reliable for "Thrown" action
-	char pad_2[66];
-	int pressedButtonsCorrectedDirections; // 0x9C
-	int pressedButtonsAbsoluteDirections;  // 0xA0
-	char pad_3[60];
+	char pad_2[102];
+	char correctedDirections; // 0x9C // Left and Right are inverted when switching sides
+	char pad_3[3];
+	char absoluteDirections; // 0xA0
+	char pad_4[3];
+	char pad_5[60];
 	int xSpeed; // 0xE0
 	int ySpeed; // 0xE4
 };
