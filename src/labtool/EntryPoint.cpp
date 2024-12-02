@@ -1,10 +1,13 @@
 #include "EntryPoint.hpp"
 #include "Hooks.hpp"
+#include "ResetState.hpp"
 
 #include "../revolveLib/RevolveLib.hpp"
 
 #include <chrono>
+#include <cstddef>
 #include <iostream>
+#include <string>
 #include <unordered_map>
 
 auto oldUnknownFunctionInGameLoop = (unsigned int(__cdecl *)(void)) nullptr;
@@ -13,9 +16,12 @@ bool isPaused = false;
 
 namespace
 {
+
 void compileTimeStructChecks()
 {
 	static_assert(sizeof(revolve::CharacterResources) == 0xC0, "Struct size mismatch: CharacterResources");
+	static_assert(offsetof(revolve::Character, absoluteDirections) == 0xA0,
+				  "Wrong offset: Character::absoluteDirections");
 }
 
 void openConsole()
@@ -86,32 +92,41 @@ void newGameUpdate(void ** esi)
 
 void frameStep()
 {
-	if (static_cast<int>(revolve::PauseMenuMode::TrainingMode) == revolve::pauseMenu.setModeInCharacterSelect)
+	static bool mustPauseNextFrame = false;
+
+	if (mustPauseNextFrame)
 	{
-		static bool mustPauseNextFrame = false;
+		isPaused = true;
+		mustPauseNextFrame = !mustPauseNextFrame;
+	}
 
-		if (mustPauseNextFrame)
-		{
-			isPaused = true;
-			mustPauseNextFrame = !mustPauseNextFrame;
-		}
+	if (::isKeyJustPressed(0x39)) // key 9
+	{
+		isPaused = !isPaused;
+	}
+	else if (::isKeyJustPressed(0x30)) // key 0
+	{
+		isPaused = !isPaused;
+		mustPauseNextFrame = true;
+	}
+}
 
-		if (::isKeyJustPressed(0x39)) // key 9
-		{
-			isPaused = !isPaused;
-		}
-		else if (::isKeyJustPressed(0x30)) // key 0
-		{
-			isPaused = !isPaused;
-			mustPauseNextFrame = true;
-		}
+void positionReset()
+{
+	if (::isKeyJustPressed(0x08)) // key Backspace
+	{
+		labtool::ResetState::reset(revolve::character1.absoluteDirections);
 	}
 }
 
 unsigned int functionInGameLoop()
 {
 	//::displayFps();
-	frameStep();
+	if (static_cast<int>(revolve::PauseMenuMode::TrainingMode) == revolve::pauseMenu.setModeInCharacterSelect)
+	{
+		frameStep();
+		positionReset();
+	}
 
 	return oldUnknownFunctionInGameLoop();
 }
