@@ -24,6 +24,8 @@ add_library(
   src/injector/DLLMain.cpp
   src/labtool/EntryPoint.cpp
   src/labtool/EntryPoint.hpp
+  src/labtool/FrameStep.cpp
+  src/labtool/FrameStep.hpp
   src/labtool/Hooks.cpp
   src/labtool/Hooks.hpp
   src/labtool/ResetState.cpp

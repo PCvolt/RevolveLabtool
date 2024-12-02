@@ -1,4 +1,5 @@
 #include "EntryPoint.hpp"
+#include "FrameStep.hpp"
 #include "Hooks.hpp"
 #include "ResetState.hpp"
 
@@ -11,8 +12,6 @@
 #include <unordered_map>
 
 auto oldUnknownFunctionInGameLoop = (unsigned int(__cdecl *)(void)) nullptr;
-
-bool isPaused = false;
 
 namespace
 {
@@ -81,7 +80,7 @@ void setDebugMode(bool isDebug)
 
 void newGameUpdate(void ** esi)
 {
-	if (isPaused)
+	if (labtool::FrameStep::isPaused)
 	{
 		return;
 	}
@@ -90,24 +89,18 @@ void newGameUpdate(void ** esi)
 	oldGameUpdate(esi);
 }
 
+// Features
 void frameStep()
 {
-	static bool mustPauseNextFrame = false;
-
-	if (mustPauseNextFrame)
-	{
-		isPaused = true;
-		mustPauseNextFrame = !mustPauseNextFrame;
-	}
+	labtool::FrameStep::pauseNextFrame();
 
 	if (::isKeyJustPressed(0x39)) // key 9
 	{
-		isPaused = !isPaused;
+		labtool::FrameStep::pause();
 	}
 	else if (::isKeyJustPressed(0x30)) // key 0
 	{
-		isPaused = !isPaused;
-		mustPauseNextFrame = true;
+		labtool::FrameStep::frameStep();
 	}
 }
 
