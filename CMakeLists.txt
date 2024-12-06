@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 20)
 add_library(
   RevolveLib STATIC
   src/revolveLib/RevolveLib.hpp
+  src/revolveLib/Action.hpp
   src/revolveLib/Address.hpp
   src/revolveLib/Address.cpp
   src/revolveLib/Camera.hpp

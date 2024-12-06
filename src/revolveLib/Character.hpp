@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Action.hpp"
 #include "Address.hpp"
 
 namespace revolve
@@ -29,7 +30,7 @@ struct Character
 	char pad_1[36];
 	Position currentPosition; // 0x24
 	Position nextPosition;	  // 0x2C // position.y freaks out, not reliable
-	short action;			  // 0x34, not reliable for "Thrown" action
+	Action action;			  // 0x34, not reliable for "Thrown" action
 	char pad_2[102];
 	char correctedDirections; // 0x9C // Left and Right are inverted when switching sides
 	char pad_3[3];

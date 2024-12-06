@@ -16,6 +16,8 @@ enum class Address : uint32_t
 	CharacterSelectCursor1 = 0x635498,
 	CharacterSelectCursor2 = 0x63549C,
 
+	ResetCharacter = 0x36630, 
+
 	PauseMenu = 0x14B856C,
 	PauseMenuUniqueGauge = 0x742798,
 	MainMenuCursor = 0x122E1DC, // static: 0x170E1DC
