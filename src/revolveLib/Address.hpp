@@ -26,9 +26,15 @@ enum class Address : uint32_t
 
 	// Calls
 	GameUpdateShim = 0x24053,
+	Call_Render = 0x2407A,
 
 	// Functions
 	BattleSceneUpdate = 0x4361B0, // void battleLoop(int param_1)
+	ReadInputs = 0x1C860,
+	UpdateCamera = 0x3140,
+	UpdateCharacterSelect = 0x47700,
+	UpdateVersusScreen = 0x48CD0,
+	Render = 0x23AF0
 };
 
 /*
