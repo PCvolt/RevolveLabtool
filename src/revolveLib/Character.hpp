@@ -21,7 +21,19 @@ struct CharacterResources
 	int currentHealth;
 	int redHealth;
 	int meter;
-	char pad_2[128];
+	char pad_2[8];
+	int comboCount;
+	int damageTaken;
+	int damageTakenToDisplay;
+	// isInHitstun is used as a bool: 0 = in hitstun, 1 = anything else.
+	// Updates when changing animation, therefore not reliable.
+	// Not reliable either for throw.
+	int isInHitstun;
+	int proratio;
+	int isBlackBeat; // bool
+	int comboDisplayTimer;
+	int comboCountToDisplay;
+	char pad_4[88];
 };
 
 // Size: ??? (0x30D8 difference between p1 and p2)
