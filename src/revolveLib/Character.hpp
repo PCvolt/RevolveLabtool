@@ -17,11 +17,33 @@ struct CharacterResources
 {
 	int maxHealth;
 	int maxMeter;
-	char pad_1[44];
+	int gutsThreshold0; // At 0% hp
+	int gutsProratio0;
+	int gutsThreshold1; // At 75% hp
+	int gutsProratio1;
+	int gutsThreshold2; // At 50% hp
+	int gutsProratio2;
+	int gutsThreshold3; // At 75% hp
+	int gutsProratio3;
+	int gutsThreshold4; // At 100% hp. Proratio is 100%, as gutsProratio4 is unused.
+	int gutsProratio4; // This value is ignored in the damage computation. Is equal to gutsProratio3.
+	char pad_1[4];
 	int currentHealth;
 	int redHealth;
 	int meter;
-	char pad_2[128];
+	char pad_2[8];
+	int comboCount;
+	int damageTaken;
+	int damageTakenToDisplay;
+	// isInHitstun is used as a bool: 0 = in hitstun, 1 = anything else.
+	// Updates when changing animation, therefore not reliable.
+	// Not reliable either for throw.
+	int isInHitstun;
+	int comboProratio;
+	int isBlackBeat; // bool
+	int comboDisplayTimer;
+	int comboCountToDisplay;
+	char pad_4[88];
 };
 
 // Size: ??? (0x30D8 difference between p1 and p2)
