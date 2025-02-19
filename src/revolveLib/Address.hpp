@@ -23,6 +23,7 @@ enum class Address : uint32_t
 	MainMenuCursor = 0x122E1DC, // static: 0x170E1DC
 	PauseMenuCursor = 0x12451b8,
 	DebugMode = 0x742128, // static: 0xC22128 // 0 = Release, 1 = Debug
+	CharacterSelectMenu = 0x122E1B0,
 
 	// Calls
 	GameUpdateShim = 0x24053,
