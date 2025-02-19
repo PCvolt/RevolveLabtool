@@ -34,7 +34,7 @@ enum class Address : uint32_t
 	UpdateCamera = 0x3140,
 	UpdateCharacterSelect = 0x47700,
 	UpdateVersusScreen = 0x48CD0,
-	
+
 	Render = 0x23AF0,
 	RenderNetworkMenu = 0x40CD0,
 	RenderStageBackground = 0x13240,

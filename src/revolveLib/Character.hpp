@@ -26,7 +26,7 @@ struct CharacterResources
 	int gutsThreshold3; // At 75% hp
 	int gutsProratio3;
 	int gutsThreshold4; // At 100% hp. Proratio is 100%, as gutsProratio4 is unused.
-	int gutsProratio4; // This value is ignored in the damage computation. Is equal to gutsProratio3.
+	int gutsProratio4;	// This value is ignored in the damage computation. Is equal to gutsProratio3.
 	char pad_1[4];
 	int currentHealth;
 	int redHealth;
