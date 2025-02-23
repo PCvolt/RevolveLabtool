@@ -10,6 +10,8 @@ enum class Address : uint32_t
 	Character2 = 0x12322D0,
 	CharacterResources1 = 0x633C28,
 	CharacterResources2 = 0x633CE8,
+	Character1Palette = 0x742548, // 0 to 3
+	Character2Palette = 0x74254C, // 0 to 3
 	Camera = 0x634440,
 
 	// Contain value from enum class CharacterIndex
@@ -18,6 +20,7 @@ enum class Address : uint32_t
 
 	ResetCharacter = 0x36630,
 
+	MainMenu = 0x421A2,
 	PauseMenu = 0x14B856C,
 	PauseMenuUniqueGauge = 0x742798,
 	MainMenuCursor = 0x122E1DC, // static: 0x170E1DC
