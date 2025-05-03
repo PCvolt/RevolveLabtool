@@ -21,13 +21,13 @@ struct CharacterSelectMenu
 	// u_Coordinates * p1ArtworkCoordinates; // 0x3C
 	// u_Coordinates * p2ArtworkCoordinates; // 0x40
 	// CursorIndex goes from 0 to 18
-	int p1CursorIndex; // 0x44
-	int p2CursorIndex; // 0x48
+	int p1CursorIndex;	// 0x44
+	int p2CursorIndex;	// 0x48
 	int cursorMaxIndex; // 0x4C, seemingly useless
-	bool p1LockedIn; // 0x50
-	bool p2LockedIn; // 0x51
+	bool p1LockedIn;	// 0x50
+	bool p2LockedIn;	// 0x51
 	char pad_3[26];
-	int timeSpent; //0x6C
+	int timeSpent; // 0x6C
 };
 
-}
+} // namespace revolve

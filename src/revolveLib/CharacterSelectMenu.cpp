@@ -3,5 +3,6 @@
 
 namespace revolve
 {
-CharacterSelectMenu & characterSelectMenu = *reinterpret_cast<CharacterSelectMenu *>(getDynamicAddress(Address::CharacterSelectMenu));
+CharacterSelectMenu & characterSelectMenu =
+	*reinterpret_cast<CharacterSelectMenu *>(getDynamicAddress(Address::CharacterSelectMenu));
 } // namespace revolve
