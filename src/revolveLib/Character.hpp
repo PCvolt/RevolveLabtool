@@ -19,7 +19,7 @@ struct CharacterResources
 	int maxMeter;
 	int gutsThreshold0; // At 0% hp
 	int gutsProratio0;
-	int gutsThreshold1; // At 75% hp
+	int gutsThreshold1; // At 25% hp
 	int gutsProratio1;
 	int gutsThreshold2; // At 50% hp
 	int gutsProratio2;
