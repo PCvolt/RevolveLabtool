@@ -29,6 +29,7 @@ enum class Address : uint32_t
 	CharacterSelectMenu = 0x122E1B0,
 
 	// Calls
+	CallReadInputs = 0x24037,
 	GameUpdateShim = 0x24053,
 	Call_Render = 0x2407A,
 
