@@ -29,6 +29,8 @@ add_library(
   src/labtool/EntryPoint.hpp
   src/labtool/FrameStep.cpp
   src/labtool/FrameStep.hpp
+  src/labtool/GamepadManager.cpp
+  src/labtool/GamepadManager.hpp
   src/labtool/Hooks.cpp
   src/labtool/Hooks.hpp
   src/labtool/ResetState.cpp

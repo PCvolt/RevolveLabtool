@@ -1,5 +1,6 @@
 #include "EntryPoint.hpp"
 #include "FrameStep.hpp"
+#include "GamepadManager.hpp"
 #include "Hooks.hpp"
 #include "ResetState.hpp"
 
@@ -10,6 +11,9 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <windows.h>
+
+labtool::GamepadManager gamepadManager;
 
 auto oldUnknownFunctionInGameLoop = (unsigned int(__cdecl *)(void)) nullptr;
 
@@ -115,6 +119,9 @@ void positionReset()
 unsigned int functionInGameLoop()
 {
 	//::displayFps();
+
+	gamepadManager.readGamepads();
+
 	if (static_cast<int>(revolve::PauseMenuMode::TrainingMode) == revolve::pauseMenu.setModeInCharacterSelect)
 	{
 		frameStep();
