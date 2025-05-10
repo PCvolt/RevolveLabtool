@@ -70,6 +70,10 @@ GameButtons GamepadManager::remapButtons(int gamepadIndex)
 	gameButtons.d = buttons & XINPUT_GAMEPAD_Y;
 	gameButtons.start = buttons & XINPUT_GAMEPAD_START;
 
+	constexpr int triggerDeadzone = 50;
+	gameButtons.a |= inputState.Gamepad.bLeftTrigger > triggerDeadzone;
+	gameButtons.b |= inputState.Gamepad.bRightTrigger > triggerDeadzone;
+
 	return gameButtons;
 }
 } // namespace labtool
