@@ -45,31 +45,31 @@ void GamepadManager::mReadGamepad(int gamepadIndex)
 }
 
 //-----------------------------------------------------------------------------
-ButtonsPressed GamepadManager::remapButtons(int gamepadIndex)
+GameButtons GamepadManager::remapButtons(int gamepadIndex)
 {
 	const auto stateActivity = m_inputStates[gamepadIndex].first;
 	if (!stateActivity)
 	{
-		return ButtonsPressed();
+		return GameButtons();
 	}
 
 	const auto inputState = m_inputStates[gamepadIndex].second;
 	const auto & buttons = inputState.Gamepad.wButtons;
 
-	ButtonsPressed buttonsPressed;
+	GameButtons gameButtons;
 	// XInput joysticks range is [-32768; 32767].
 	// We apply an arbitrary deadzone to avoid drift from affecting controls.
 	constexpr int deadzone = 15000;
-	buttonsPressed.up = (buttons & XINPUT_GAMEPAD_DPAD_UP) || (inputState.Gamepad.sThumbLY > deadzone);
-	buttonsPressed.down = (buttons & XINPUT_GAMEPAD_DPAD_DOWN) || (inputState.Gamepad.sThumbLY < -deadzone);
-	buttonsPressed.left = (buttons & XINPUT_GAMEPAD_DPAD_LEFT) || (inputState.Gamepad.sThumbLX < -deadzone);
-	buttonsPressed.right = (buttons & XINPUT_GAMEPAD_DPAD_RIGHT) || (inputState.Gamepad.sThumbLX > deadzone);
-	buttonsPressed.a = buttons & XINPUT_GAMEPAD_A;
-	buttonsPressed.b = buttons & XINPUT_GAMEPAD_B;
-	buttonsPressed.c = buttons & XINPUT_GAMEPAD_X;
-	buttonsPressed.d = buttons & XINPUT_GAMEPAD_Y;
-	buttonsPressed.start = buttons & XINPUT_GAMEPAD_START;
+	gameButtons.up = (buttons & XINPUT_GAMEPAD_DPAD_UP) || (inputState.Gamepad.sThumbLY > deadzone);
+	gameButtons.down = (buttons & XINPUT_GAMEPAD_DPAD_DOWN) || (inputState.Gamepad.sThumbLY < -deadzone);
+	gameButtons.left = (buttons & XINPUT_GAMEPAD_DPAD_LEFT) || (inputState.Gamepad.sThumbLX < -deadzone);
+	gameButtons.right = (buttons & XINPUT_GAMEPAD_DPAD_RIGHT) || (inputState.Gamepad.sThumbLX > deadzone);
+	gameButtons.a = buttons & XINPUT_GAMEPAD_A;
+	gameButtons.b = buttons & XINPUT_GAMEPAD_B;
+	gameButtons.c = buttons & XINPUT_GAMEPAD_X;
+	gameButtons.d = buttons & XINPUT_GAMEPAD_Y;
+	gameButtons.start = buttons & XINPUT_GAMEPAD_START;
 
-	return buttonsPressed;
+	return gameButtons;
 }
 } // namespace labtool

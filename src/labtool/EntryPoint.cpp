@@ -122,12 +122,12 @@ unsigned int functionInGameLoop()
 	//::displayFps();
 
 	gamepadManager.readGamepads();
-	const auto buttonsPressed = gamepadManager.remapButtons(0);
-	const auto buttonBits = buttonsPressed.buildButtonsBitsVariable();
+	const auto gameButtons = gamepadManager.remapButtons(0);
+	const auto buttonBitmask = gameButtons.buildButtonsBitmask();
 
-	if (buttonBits != 0)
+	if (buttonBitmask != 0)
 	{
-		std::cout << std::bitset<16>(buttonBits) << std::endl;
+		std::cout << std::bitset<16>(buttonBitmask) << std::endl;
 	}
 
 	if (static_cast<int>(revolve::PauseMenuMode::TrainingMode) == revolve::pauseMenu.setModeInCharacterSelect)

@@ -28,6 +28,7 @@ enum class PositionPreset
 	CorneringLeft
 };
 
+// TODO: To be replaced with GameButtons.
 struct PressedButtons
 {
 	char up;

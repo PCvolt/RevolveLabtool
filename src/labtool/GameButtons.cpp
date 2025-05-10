@@ -1,4 +1,4 @@
-#include "ButtonsPressed.hpp"
+#include "GameButtons.hpp"
 
 namespace
 {
@@ -17,7 +17,7 @@ namespace
 namespace labtool
 {
 //-----------------------------------------------------------------------------
-int ButtonsPressed::buildButtonsBitsVariable() const
+int GameButtons::buildButtonsBitmask() const
 {
 	int bits = 0;
 
