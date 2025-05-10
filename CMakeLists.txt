@@ -25,6 +25,8 @@ target_include_directories(RevolveLib PRIVATE src/revolveLib)
 add_library(
   Labtool SHARED
   src/injector/DLLMain.cpp
+  src/labtool/ButtonsPressed.cpp
+  src/labtool/ButtonsPressed.hpp
   src/labtool/EntryPoint.cpp
   src/labtool/EntryPoint.hpp
   src/labtool/FrameStep.cpp
