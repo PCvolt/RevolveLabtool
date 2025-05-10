@@ -12,7 +12,7 @@ struct ButtonsPressed
 	/**
 	 * Creates a variable that can be fed to the game, representing the buttons pressed.
 	 */
-	[[nodiscard]] int buildButtonsBitsVariable();
+	[[nodiscard]] int buildButtonsBitsVariable() const;
 
 	bool up;	 // 0x1
 	bool down;	 // 0x2

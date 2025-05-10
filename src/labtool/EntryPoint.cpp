@@ -6,6 +6,7 @@
 
 #include "../revolveLib/RevolveLib.hpp"
 
+#include <bitset>
 #include <chrono>
 #include <cstddef>
 #include <iostream>
@@ -121,6 +122,13 @@ unsigned int functionInGameLoop()
 	//::displayFps();
 
 	gamepadManager.readGamepads();
+	const auto buttonsPressed = gamepadManager.remapButtons(0);
+	const auto buttonBits = buttonsPressed.buildButtonsBitsVariable();
+
+	if (buttonBits != 0)
+	{
+		std::cout << std::bitset<16>(buttonBits) << std::endl;
+	}
 
 	if (static_cast<int>(revolve::PauseMenuMode::TrainingMode) == revolve::pauseMenu.setModeInCharacterSelect)
 	{

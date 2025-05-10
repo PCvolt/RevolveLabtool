@@ -17,7 +17,7 @@ namespace
 namespace labtool
 {
 //-----------------------------------------------------------------------------
-int ButtonsPressed::buildButtonsBitsVariable()
+int ButtonsPressed::buildButtonsBitsVariable() const
 {
 	int bits = 0;
 

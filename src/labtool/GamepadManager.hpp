@@ -6,6 +6,8 @@
 #include <Xinput.h>
 #pragma comment(lib, "Xinput9_1_0.lib")
 
+#include "ButtonsPressed.hpp"
+
 #include <map>
 
 namespace labtool
@@ -19,6 +21,7 @@ class GamepadManager
 	GamepadManager();
 
 	void readGamepads();
+	[[nodiscard]] ButtonsPressed remapButtons(int gamepadIndex);
 
   private:
 	void mReadGamepad(int gamepadIndex);
