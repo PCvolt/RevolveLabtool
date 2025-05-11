@@ -17,6 +17,7 @@
 labtool::GamepadManager gamepadManager;
 
 auto oldUnknownFunctionInGameLoop = (unsigned int(__cdecl *)(void)) nullptr;
+auto oldReadInputs = (unsigned int(__cdecl *)(void)) nullptr;
 
 namespace
 {
@@ -121,15 +122,6 @@ unsigned int functionInGameLoop()
 {
 	//::displayFps();
 
-	gamepadManager.readGamepads();
-	const auto gameButtons = gamepadManager.remapButtons(0);
-	const auto buttonBitmask = gameButtons.buildButtonsBitmask();
-
-	if (buttonBitmask != 0)
-	{
-		std::cout << std::bitset<16>(buttonBitmask) << std::endl;
-	}
-
 	if (static_cast<int>(revolve::PauseMenuMode::TrainingMode) == revolve::pauseMenu.setModeInCharacterSelect)
 	{
 		frameStep();
@@ -137,6 +129,22 @@ unsigned int functionInGameLoop()
 	}
 
 	return oldUnknownFunctionInGameLoop();
+}
+
+unsigned int readInputs()
+{
+	gamepadManager.readGamepads();
+	const auto gameButtons = gamepadManager.remapButtons(0);
+	const auto buttonBitmask = gameButtons.buildButtonsBitmask();
+
+	// if (buttonBitmask != 0)
+	// {
+	//     std::cout << std::bitset<16>(buttonBitmask) << std::endl;
+	// }
+
+	auto & inputs = *reinterpret_cast<int *>(revolve::Address::Inputs);
+	inputs = 0;
+	return 0;
 }
 
 DWORD WINAPI HookThread(HMODULE hModule)
@@ -152,6 +160,10 @@ DWORD WINAPI HookThread(HMODULE hModule)
 		revolve::getDynamicAddress(static_cast<revolve::Address>(static_cast<uint32_t>(0x2400E)));
 	oldUnknownFunctionInGameLoop = (unsigned int(__cdecl *)(void))hookFunctionCall(
 		(DWORD) static_cast<uint32_t>(addressUnknownFunction), (DWORD)functionInGameLoop);
+
+	auto callOldReadInputs = revolve::getDynamicAddress(revolve::Address::CallReadInputs);
+	oldReadInputs = (unsigned int(__cdecl *)(void))hookFunctionCall((DWORD) static_cast<uint32_t>(callOldReadInputs),
+																	(DWORD)readInputs);
 
 	return 0;
 }

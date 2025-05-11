@@ -20,6 +20,7 @@ enum class Address : uint32_t
 
 	ResetCharacter = 0x36630,
 
+	// Globals
 	MainMenu = 0x421A2,
 	PauseMenu = 0x14B856C,
 	PauseMenuUniqueGauge = 0x742798,
@@ -27,6 +28,9 @@ enum class Address : uint32_t
 	PauseMenuCursor = 0x12451b8,
 	DebugMode = 0x742128, // static: 0xC22128 // 0 = Release, 1 = Debug
 	CharacterSelectMenu = 0x122E1B0,
+	Inputs = 0x725410,
+	NetworkInputFlags = 0x725414,
+	KeyState = 0x725418,
 
 	// Calls
 	CallReadInputs = 0x24037,
