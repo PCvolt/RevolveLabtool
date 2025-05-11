@@ -1,5 +1,6 @@
 #include "Hooks.hpp"
 
+//----------------------------------------------------------------------------------------------------------------------
 DWORD hookFunctionCall(DWORD instructionAddress, DWORD target)
 {
 	constexpr int instructionSize = 5;
@@ -28,6 +29,7 @@ DWORD hookFunctionCall(DWORD instructionAddress, DWORD target)
 	return oldTargetAddress;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 DWORD patchToCallShim(DWORD instructionAddress, DWORD target)
 {
 	constexpr auto sizeToPatch = 5;
@@ -49,6 +51,7 @@ DWORD patchToCallShim(DWORD instructionAddress, DWORD target)
 	return 1;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 void __declspec(naked) oldGameUpdateShim()
 {
 	// Replacing this code at +0x24053:

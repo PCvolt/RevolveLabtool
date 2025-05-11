@@ -4,10 +4,10 @@
 
 namespace labtool
 {
-//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 GamepadManager::GamepadManager() = default;
 
-//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 void GamepadManager::readGamepads()
 {
 	// XInput only accepts 4 gamepads, and won't read higher indexes.
@@ -19,7 +19,7 @@ void GamepadManager::readGamepads()
 	}
 }
 
-//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 void GamepadManager::mReadGamepad(int gamepadIndex)
 {
 	XINPUT_STATE state;
@@ -44,7 +44,7 @@ void GamepadManager::mReadGamepad(int gamepadIndex)
 	stateActivity = isConnected;
 }
 
-//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 GameButtons GamepadManager::remapButtons(int gamepadIndex)
 {
 	const auto stateActivity = m_inputStates[gamepadIndex].first;
@@ -59,11 +59,11 @@ GameButtons GamepadManager::remapButtons(int gamepadIndex)
 	GameButtons gameButtons;
 	// XInput joysticks range is [-32768; 32767].
 	// We apply an arbitrary deadzone to avoid drift from affecting controls.
-	constexpr int deadzone = 15000;
-	gameButtons.up = (buttons & XINPUT_GAMEPAD_DPAD_UP) || (inputState.Gamepad.sThumbLY > deadzone);
-	gameButtons.down = (buttons & XINPUT_GAMEPAD_DPAD_DOWN) || (inputState.Gamepad.sThumbLY < -deadzone);
-	gameButtons.left = (buttons & XINPUT_GAMEPAD_DPAD_LEFT) || (inputState.Gamepad.sThumbLX < -deadzone);
-	gameButtons.right = (buttons & XINPUT_GAMEPAD_DPAD_RIGHT) || (inputState.Gamepad.sThumbLX > deadzone);
+	constexpr int stickDeadzone = 15000;
+	gameButtons.up = (buttons & XINPUT_GAMEPAD_DPAD_UP) || (inputState.Gamepad.sThumbLY > stickDeadzone);
+	gameButtons.down = (buttons & XINPUT_GAMEPAD_DPAD_DOWN) || (inputState.Gamepad.sThumbLY < -stickDeadzone);
+	gameButtons.left = (buttons & XINPUT_GAMEPAD_DPAD_LEFT) || (inputState.Gamepad.sThumbLX < -stickDeadzone);
+	gameButtons.right = (buttons & XINPUT_GAMEPAD_DPAD_RIGHT) || (inputState.Gamepad.sThumbLX > stickDeadzone);
 	gameButtons.a = buttons & XINPUT_GAMEPAD_A;
 	gameButtons.b = buttons & XINPUT_GAMEPAD_B;
 	gameButtons.c = buttons & XINPUT_GAMEPAD_X;

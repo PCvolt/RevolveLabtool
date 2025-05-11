@@ -21,7 +21,7 @@ auto oldReadInputs = (unsigned int(__cdecl *)(void)) nullptr;
 
 namespace
 {
-
+//----------------------------------------------------------------------------------------------------------------------
 void compileTimeStructChecks()
 {
 	static_assert(sizeof(revolve::CharacterResources) == 0xC0, "Struct size mismatch: CharacterResources");
@@ -29,6 +29,7 @@ void compileTimeStructChecks()
 				  "Wrong offset: Character::absoluteDirections");
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 void openConsole()
 {
 	AllocConsole();
@@ -38,6 +39,7 @@ void openConsole()
 	std::cout << "Hooked to BBBR" << std::endl;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 bool isKeyJustPressed(int virtualKey)
 {
 	static std::unordered_map<int, bool> previousKeyState;
@@ -49,6 +51,7 @@ bool isKeyJustPressed(int virtualKey)
 	return justPressed;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 void displayFps()
 {
 	using namespace std::chrono;
@@ -78,12 +81,14 @@ void displayFps()
 }
 } // namespace
 
+//----------------------------------------------------------------------------------------------------------------------
 void setDebugMode(bool isDebug)
 {
 	int & debugMode = *reinterpret_cast<int *>(revolve::getDynamicAddress(revolve::Address::DebugMode));
 	debugMode = isDebug;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 void newGameUpdate(void ** esi)
 {
 	if (labtool::FrameStep::isPaused)
@@ -95,7 +100,7 @@ void newGameUpdate(void ** esi)
 	oldGameUpdate(esi);
 }
 
-// Features
+//----------------------------------------------------------------------------------------------------------------------
 void frameStep()
 {
 	labtool::FrameStep::pauseNextFrame();
@@ -110,6 +115,7 @@ void frameStep()
 	}
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 void positionReset()
 {
 	if (::isKeyJustPressed(0x08)) // key Backspace
@@ -118,6 +124,7 @@ void positionReset()
 	}
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 unsigned int functionInGameLoop()
 {
 	//::displayFps();
@@ -131,6 +138,7 @@ unsigned int functionInGameLoop()
 	return oldUnknownFunctionInGameLoop();
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 unsigned int readInputs()
 {
 	gamepadManager.readGamepads();
@@ -147,6 +155,7 @@ unsigned int readInputs()
 	return 0;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 DWORD WINAPI HookThread(HMODULE hModule)
 {
 	::compileTimeStructChecks();

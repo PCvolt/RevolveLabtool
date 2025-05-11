@@ -41,6 +41,7 @@ struct PressedButtons
 	char d;
 };
 
+//----------------------------------------------------------------------------------------------------------------------
 PressedButtons ResetState::mReadPressedButtons(char pressedButtonsBits)
 {
 	PressedButtons pressedButtons;
@@ -56,6 +57,7 @@ PressedButtons ResetState::mReadPressedButtons(char pressedButtonsBits)
 	return pressedButtons;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 Direction ResetState::mPressedButtonsToDirection(PressedButtons pressedButtons)
 {
 	// For now, no handling of facing direction
@@ -96,6 +98,7 @@ Direction ResetState::mPressedButtonsToDirection(PressedButtons pressedButtons)
 	return Direction::Neutral;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 void ResetState::reset(char pressedButtonsBits)
 {
 	const auto pressedButtons = mReadPressedButtons(pressedButtonsBits);
@@ -103,6 +106,7 @@ void ResetState::reset(char pressedButtonsBits)
 	mResetCharacters(direction);
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 void ResetState::mResetCharacters(Direction direction)
 {
 	static auto currentPreset = PositionPreset::Roundstart;
@@ -136,6 +140,7 @@ void ResetState::mResetCharacters(Direction direction)
 	return;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 void ResetState::mResetCharacters(PositionPreset preset)
 {
 	switch (preset)
