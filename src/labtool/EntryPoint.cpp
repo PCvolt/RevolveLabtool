@@ -145,13 +145,11 @@ unsigned int readInputs()
 	const auto gameButtons = gamepadManager.remapButtons(0);
 	const auto buttonBitmask = gameButtons.buildButtonsBitmask();
 
-	// if (buttonBitmask != 0)
-	// {
-	//     std::cout << std::bitset<16>(buttonBitmask) << std::endl;
-	// }
+	auto & inputs = *(reinterpret_cast<int *>(revolve::getDynamicAddress(revolve::Address::Inputs)));
+	inputs = buttonBitmask;
 
-	auto & inputs = *reinterpret_cast<int *>(revolve::Address::Inputs);
-	inputs = 0;
+	std::cout << std::bitset<16>(inputs) << std::endl;
+
 	return 0;
 }
 
