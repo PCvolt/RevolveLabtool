@@ -58,10 +58,10 @@ struct Character
 	int correctedInputs; // 0x9C // Left and Right are inverted when switching sides
 	int rawInputs;		 // 0xA0
 	char pad_5[60];
-	int xSpeed; // 0xE0
-	int ySpeed; // 0xE4
-	char pad_6[4];
-	int gravity; // 0xEC
+	int xSpeed;		   // 0xE0
+	int ySpeed;		   // 0xE4
+	int xAcceleration; // 0xE8
+	int gravity;	   // 0xEC
 };
 
 enum class CharacterIndex
