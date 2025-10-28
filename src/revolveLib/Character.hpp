@@ -54,10 +54,8 @@ struct Character
 	Position nextPosition;	  // 0x2C // position.y freaks out, not reliable
 	Action action;			  // 0x34, not reliable for "Thrown" action
 	char pad_2[102];
-	char correctedDirections; // 0x9C // Left and Right are inverted when switching sides
-	char pad_3[3];
-	char absoluteDirections; // 0xA0
-	char pad_4[3];
+	int correctedInputs; // 0x9C // Left and Right are inverted when switching sides
+	int rawInputs;		 // 0xA0
 	char pad_5[60];
 	int xSpeed; // 0xE0
 	int ySpeed; // 0xE4

@@ -25,8 +25,7 @@ namespace
 void compileTimeStructChecks()
 {
 	static_assert(sizeof(revolve::CharacterResources) == 0xC0, "Struct size mismatch: CharacterResources");
-	static_assert(offsetof(revolve::Character, absoluteDirections) == 0xA0,
-				  "Wrong offset: Character::absoluteDirections");
+	static_assert(offsetof(revolve::Character, rawInputs) == 0xA0, "Wrong offset: Character::rawInputs");
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -120,7 +119,7 @@ void positionReset()
 {
 	if (::isKeyJustPressed(0x08)) // key Backspace
 	{
-		labtool::ResetState::reset(revolve::character1.absoluteDirections);
+		labtool::ResetState::reset(revolve::character1.rawInputs);
 	}
 }
 
