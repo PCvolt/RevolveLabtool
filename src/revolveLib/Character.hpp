@@ -53,7 +53,8 @@ struct Character
 	Position currentPosition; // 0x24
 	Position nextPosition;	  // 0x2C // position.y freaks out, not reliable
 	Action action;			  // 0x34, not reliable for "Thrown" action
-	char pad_2[102];
+	short actionTriggerCode;  // 0x36 Inputting a number here enforces the character to undergo an animation
+	char pad_2[100];
 	int correctedInputs; // 0x9C // Left and Right are inverted when switching sides
 	int rawInputs;		 // 0xA0
 	char pad_5[60];
