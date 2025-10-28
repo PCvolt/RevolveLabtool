@@ -59,6 +59,8 @@ struct Character
 	char pad_5[60];
 	int xSpeed; // 0xE0
 	int ySpeed; // 0xE4
+	char pad_6[4];
+	int gravity; // 0xEC
 };
 
 enum class CharacterIndex
